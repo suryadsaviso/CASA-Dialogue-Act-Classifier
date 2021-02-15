@@ -3,9 +3,9 @@ import torch
 
 class ContextAwareAttention(nn.Module):
     
-    def __init__(self, hidden_size=1536, output_size=768, seq_len=128):
+    def __init__(self, hidden_size=1536, output_size=768, seq_len=128, device=torch.device("cpu")):
         super(ContextAwareAttention, self).__init__()
-        
+        self.device=device
         
         # context aware self attention
         self.fc_1 = nn.Linear(in_features=hidden_size, out_features=output_size, bias=False)

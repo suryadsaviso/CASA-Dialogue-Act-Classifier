@@ -17,7 +17,7 @@ class ContextAwareDAC(nn.Module):
         self.device = device
         
         # utterance encoder model
-        self.utterance_rnn = UtteranceRNN(model_name=model_name, hidden_size=hidden_size)
+        self.utterance_rnn = UtteranceRNN(model_name=model_name, hidden_size=hidden_size, device=device)
         
         # context aware self attention module
         self.context_aware_attention = ContextAwareAttention(hidden_size=2*hidden_size, output_size=hidden_size, seq_len=128)

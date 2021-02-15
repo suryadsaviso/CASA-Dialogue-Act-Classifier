@@ -1,16 +1,18 @@
 
+import torch
 import  torch.nn as nn
 from transformers import AutoConfig, AutoModel, AutoTokenizer
 
 
 class UtteranceRNN(nn.Module):
     
-    def __init__(self, model_name="roberta-base", hidden_size=768, bidirectional=True, num_layers=1):
+    def __init__(self, model_name="roberta-base", hidden_size=768, bidirectional=True, num_layers=1, device=torch.device("cpu")):
         super(UtteranceRNN, self).__init__()
-        
+        self.device=device
         
         # embedding layer is replaced by pretrained roberta's embedding
-        self.base = AutoModel.from_pretrained(pretrained_model_name_or_path=model_name)
+        self.base = AutoModel.from_pretrained(pretrained_model_name_or_path=model_name, return_dict=False)
+        self.base.to(device)
         # freeze the model parameters
         for param in self.base.parameters():
             param.requires_grad = False
@@ -21,7 +23,7 @@ class UtteranceRNN(nn.Module):
             hidden_size=hidden_size, 
             num_layers=num_layers, 
             bidirectional=bidirectional,
-            batch_first=True
+            batch_first=True,
         )
     
     def forward(self, input_ids, attention_mask, seq_len):
@@ -30,7 +32,7 @@ class UtteranceRNN(nn.Module):
         """
         
     
-        hidden_states, _ = self.base(input_ids, attention_mask) # hidden_states.shape = [batch, max_len, hidden_size]
+        hidden_states,_ = self.base(input_ids, attention_mask) # hidden_states.shape = [batch, max_len, hidden_size]
         
         # padding and packing 
         #packed_hidden_states = nn.utils.rnn.pack_padded_sequence(hidden_states, seq_len, batch_first=True, enforce_sorted=False)   
