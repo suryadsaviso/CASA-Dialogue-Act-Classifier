@@ -14,8 +14,8 @@ class UtteranceRNN(nn.Module):
         self.base = AutoModel.from_pretrained(pretrained_model_name_or_path=model_name, return_dict=False)
         self.base.to(device)
         # freeze the model parameters
-        for param in self.base.parameters():
-            param.requires_grad = False
+        # for param in self.base.parameters():
+        #     param.requires_grad = False
         
         #self.embedding = nn.Embedding(num_embeddings=vocab_size, embedding_dim=embedding_size)
         self.rnn = nn.RNN(
