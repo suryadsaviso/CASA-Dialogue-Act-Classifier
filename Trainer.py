@@ -14,12 +14,12 @@ from transformers import AutoConfig, AutoTokenizer, AutoModel
 from models.ContextAwareDAC import ContextAwareDAC
 
 # training and evaluation
-import wandb
+# import wandb
 import torch.nn.functional as F
 import torch.optim as optim
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import EarlyStopping, ProgressBar, ModelCheckpoint
-from pytorch_lightning.loggers import WandbLogger
+# from pytorch_lightning.loggers import WandbLogger
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
 from dataset.dataset import DADataset
 
@@ -62,7 +62,7 @@ class LightningModel(pl.LightningModule):
         
         acc = accuracy_score(targets.cpu(), logits.argmax(dim=1).cpu())
         f1 = f1_score(targets.cpu(), logits.argmax(dim=1).cpu(), average=self.config['average'])
-        wandb.log({"loss":loss, "accuracy":acc, "f1_score":f1})
+        # wandb.log({"loss":loss, "accuracy":acc, "f1_score":f1})
         return {"loss":loss, "accuracy":acc, "f1_score":f1}
     
     def val_dataloader(self):
@@ -88,7 +88,7 @@ class LightningModel(pl.LightningModule):
         avg_f1 = torch.stack([x['val_f1'] for x in outputs]).mean()
         avg_precision = torch.stack([x['val_precision'] for x in outputs]).mean()
         avg_recall = torch.stack([x['val_recall'] for x in outputs]).mean()
-        wandb.log({"val_loss":avg_loss, "val_accuracy":avg_acc, "val_f1":avg_f1, "val_precision":avg_precision, "val_recall":avg_recall})
+        # wandb.log({"val_loss":avg_loss, "val_accuracy":avg_acc, "val_f1":avg_f1, "val_precision":avg_precision, "val_recall":avg_recall})
         return {"val_loss":avg_loss, "val_accuracy":avg_acc, "val_f1":avg_f1, "val_precision":avg_precision, "val_recall":avg_recall}
     
     def test_dataloader(self):

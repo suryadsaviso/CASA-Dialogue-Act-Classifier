@@ -4,7 +4,8 @@ import os
 config = {
     
     # data 
-    "data_dir":os.path.join('//mnt/d/Programs/NLP/utils/CASA-Dialogue-Act-Classifier-main', 'data'),#os.getcwd(), 'data'),
+    # "data_dir":os.path.join('//mnt/d/Programs/NLP/utils/CASA-Dialogue-Act-Classifier-main', 'data'),#os.getcwd(), 'data'),
+    "data_dir":os.path.join(os.getcwd(), 'data'),
     "dataset":"switchboard",
     #"text_field":"clean_text",
     #"label_field":"act_label_1",
@@ -21,7 +22,8 @@ config = {
     "num_classes":42, # there are 43 classes in switchboard corpus
     
     # training
-    "save_dir":os.path.join('//mnt/d/Programs/NLP/utils/CASA-Dialogue-Act-Classifier-main', 'output'),
+    # "save_dir":os.path.join('//mnt/d/Programs/NLP/utils/CASA-Dialogue-Act-Classifier-main', 'output'),
+    "save_dir":os.path.join(os.getcwd(), 'output'),
     "project":"dialogue-act-classification",
     "run_name":"context-aware-attention-dac",
     "lr":1e-5,
@@ -32,5 +34,6 @@ config = {
     "average":"micro",
     "epochs":100,
     "device":torch.device("cuda" if torch.cuda.is_available() else "cpu"),
-    
+    "restart":False,
+    "restart_checkpoint":"./checkpoints/epoch=10-val_accuracy=0.720291.ckpt" 
 }

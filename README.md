@@ -10,7 +10,7 @@ PyTorch implementation of the paper [**Dialogue Act Classification with Context-
   2. Unzip the dataset: `unzip switchboard.zip`
   3. Navigate to the main dir: `cd ..`
   4. Install the dependencies in a separate python environment.
-  5. [Optional] Change the project_name and run_name in the logger or disable the wandb logger if you don't want to use it by commenting the logger code (`line 15-20 in main.py`) and don't pass it to Lightning trainer (`line 32 in main.py`), and then comment the logging code in `Trainer.py (line 70 and 95)`.  By default Lightning will log to tensorboard logger.
+  5. [Optional] Change the project_name and run_name in the logger or disable the wandb logger if you don't want to use it by commenting the logger code (`line 19-24 in main.py`) and don't pass it to Lightning trainer (`line 41 in main.py`), and then comment the logging code in `Trainer.py (line 65 and 91)`.  By default Lightning will log to tensorboard logger.
   6. [Optional] Change the parameters (`batch_size, lr, epochs etc`) in `config.py`.
   7. Run main.py using `python main.py`
   8. Model will be trained and best checkpoint will be saved. 
