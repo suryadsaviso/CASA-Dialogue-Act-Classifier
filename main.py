@@ -44,7 +44,10 @@ if __name__=="__main__":
         trainer = pl.Trainer(
             resume_from_checkpoint=config['restart_checkpoint'],
             # logger=logger,
-            gpus=[0], #no GPU available here
+            # gpus=[0], #no GPU available here
+            accelerator="gpu",
+            devices= -1,
+            enable_checkpointing=True,
             checkpoint_callback=checkpoints,
             callbacks=[early_stopping],
             default_root_dir="./models/",
@@ -55,7 +58,9 @@ if __name__=="__main__":
     else:
         trainer = pl.Trainer(
             # logger=logger,
-            gpus=[0], #no GPU available here
+            # gpus=[0], #no GPU available herea
+            accelerator="gpu",
+            devices= -1,
             checkpoint_callback=checkpoints,
             callbacks=[early_stopping],
             default_root_dir="./models/",
@@ -63,7 +68,6 @@ if __name__=="__main__":
             precision=config["precision"]#,
             # automatic_optimization=True
         )
-    
         
     trainer.fit(model)
     

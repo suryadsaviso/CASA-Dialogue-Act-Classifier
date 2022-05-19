@@ -145,7 +145,7 @@ class DADataset(Dataset):
     
     __label_dict = dict()
     
-    def __init__(self, tokenizer, data, text_field = "clean_text", label_field="act_label_1", max_len=512, label_dict=None, device='cpu'):
+    def __init__(self, tokenizer, data, text_field = "Text", label_field="DamslActTag", max_len=512, label_dict=None, device='cpu'):
         
         self.text = list(data[text_field]) #data['train'][text_field]
         self.acts = list(data[label_field]) #['train'][label_field]
